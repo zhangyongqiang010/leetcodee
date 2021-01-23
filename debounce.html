@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>防抖</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+  <script src='main.js'></script>
+</head>
+<body>
+  <button id="btn">点击</button>
+</body>
+
+<script>
+  function handle() {
+    console.log('2121')
+  }
+  function debounce(fn, delay, immediate) {
+    let timer = null;
+    return function () {
+      let context = this;
+      let args = arguments;
+      // if (immediate) {  //第一次立即执行
+      //   if(!timer) {
+      //     fn.apply(context, args);
+      //   }
+      // }
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn.apply(context, args);
+      }, delay);
+    };
+  }
+
+  // function throttle(fn, wait) {
+  //   let pre = 0
+  //   return function() {
+  //     let now = Date.now()
+  //     let context = this;
+  //     let args = arguments;
+  //     let remaining = wait - (now - pre)
+  //     setTimeout(() => {
+  //       fn.apply(context, args)
+  //     }, remaining)
+
+  //   }
+  // }
+  document.getElementById('btn').addEventListener('click', debounce(handle, 1000, true))
+</script>
+</html>
+
